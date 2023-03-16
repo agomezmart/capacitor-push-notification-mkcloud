@@ -13,11 +13,11 @@
     "ios/Plugin/",
     "CapacitorPushNotifications.podspec"
   ],
-  "author": "Ionic <hi@ionicframework.com>",
+  "author": "Alberto <a.gomez@crowdfarming.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ionic-team/capacitor-plugins.git"
+    "url": "git+https://github.com/agomezmart/capacitor-push-notification-mkcloud.git"
   },
   "bugs": {
     "url": "https://github.com/ionic-team/capacitor-plugins/issues"
