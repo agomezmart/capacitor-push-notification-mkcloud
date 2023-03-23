@@ -1,6 +1,6 @@
 {
   "name": "@crowdfarming/push-notifications",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "The Push Notifications API provides access to native push notifications.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -77,5 +77,8 @@
     "android": {
       "src": "android"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
