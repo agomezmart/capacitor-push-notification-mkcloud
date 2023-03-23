@@ -15,6 +15,10 @@
   ],
   "author": "Alberto <a.gomez@crowdfarming.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agomezmart/capacitor-push-notification-mkcloud.git"
+  },
   "bugs": {
     "url": "https://github.com/ionic-team/capacitor-plugins/issues"
   },
