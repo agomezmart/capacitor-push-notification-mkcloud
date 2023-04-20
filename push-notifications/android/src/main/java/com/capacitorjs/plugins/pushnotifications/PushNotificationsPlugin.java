@@ -11,6 +11,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.service.notification.StatusBarNotification;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import com.getcapacitor.*;
 import com.getcapacitor.annotation.CapacitorPlugin;
@@ -18,6 +21,8 @@ import com.getcapacitor.annotation.Permission;
 import com.getcapacitor.annotation.PermissionCallback;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
+import com.salesforce.marketingcloud.MarketingCloudSdk;
+
 import java.util.Arrays;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -95,6 +100,13 @@ public class PushNotificationsPlugin extends Plugin {
         } else {
             if (getPermissionState(PUSH_NOTIFICATIONS) != PermissionState.GRANTED) {
                 requestPermissionForAlias(PUSH_NOTIFICATIONS, call, "permissionsCallback");
+            } else {
+                MarketingCloudSdk.requestSdk(new MarketingCloudSdk.WhenReadyListener() {
+                    @Override
+                    public void ready(@NonNull MarketingCloudSdk sdk) {
+                        sdk.getPushMessageManager().enablePush();
+                    }
+                });
             }
         }
     }
@@ -206,6 +218,14 @@ public class PushNotificationsPlugin extends Plugin {
         JSObject data = new JSObject();
         data.put("value", token);
         notifyListeners(EVENT_TOKEN_CHANGE, data, true);
+
+        // Update token to MC
+        MarketingCloudSdk.requestSdk(new MarketingCloudSdk.WhenReadyListener() {
+            @Override
+            public void ready(@NonNull MarketingCloudSdk sdk) {
+                sdk.getPushMessageManager().setPushToken(token);
+            }
+        });
     }
 
     public void sendError(String error) {
